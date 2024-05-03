@@ -36,15 +36,23 @@ public class Journal
     {
         _entries.Clear();
 
-        string[] lines = File.ReadAllLines(file);
+        
+            using (StreamReader loadJournal = new StreamReader(file))
+            {
+                while (!loadJournal.EndOfStream)
+                {
+                    string date = loadJournal.ReadLine();
+                    string promptText = loadJournal.ReadLine();
+                    string entryText = loadJournal.ReadLine();
 
-        foreach(string line in lines)
-        {
-            string[] parts = line.Split(",");
+                    Entry entry = new Entry();
+                    entry._date = date;
+                    entry._promptText = promptText;
+                    entry._entryText = entryText;
 
-            string _date = parts[0];
-            string _promptText = parts[1];
-            string _entryText = parts[2];
-        }
+                    _entries.Add(entry);
+
+                }
+            }
     }
 }

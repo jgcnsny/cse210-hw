@@ -27,7 +27,7 @@ class Program
         if(respond == "1")
         {
             string randomPrompt = promptGenerator.GetRandomPrompt();
-            string currentDate = DateTime.Now.ToString("MM-dd-yyyy");
+            string currentDate = DateTime.Now.ToString("MM/dd/yyyy");
             Console.WriteLine(randomPrompt);
             Console.Write("> ");
             string userEntry = Console.ReadLine();
