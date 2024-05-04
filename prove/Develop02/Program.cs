@@ -1,3 +1,4 @@
+// I add a new entry to upload a photo of the day. Since this is a text based program the user will input the path of the image they want to upload
 using System;
 
 class Program
@@ -31,10 +32,13 @@ class Program
             Console.WriteLine(randomPrompt);
             Console.Write("> ");
             string userEntry = Console.ReadLine();
+            Console.Write("Upload your photo of the day (url path): ");
+            string imageEntry = Console.ReadLine();
             Entry newEntry = new Entry();
             newEntry._date = currentDate;
             newEntry._promptText = randomPrompt;
             newEntry._entryText = userEntry;
+            newEntry._imagePath = imageEntry;
 
             journal.AddEntry(newEntry);
         }

@@ -28,6 +28,7 @@ public class Journal
                     journalSave.WriteLine(entry._date);
                     journalSave.WriteLine(entry._promptText);
                     journalSave.WriteLine(entry._entryText);
+                    journalSave.WriteLine(entry._imagePath);
                 }
             }
     }
@@ -44,11 +45,13 @@ public class Journal
                     string date = loadJournal.ReadLine();
                     string promptText = loadJournal.ReadLine();
                     string entryText = loadJournal.ReadLine();
+                    string image = loadJournal.ReadLine();
 
                     Entry entry = new Entry();
                     entry._date = date;
                     entry._promptText = promptText;
                     entry._entryText = entryText;
+                    entry._imagePath = image;
 
                     _entries.Add(entry);
 
