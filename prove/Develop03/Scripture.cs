@@ -23,7 +23,7 @@ public class Scripture
 
     public string GetDisplayText()
     {
-        string scripture = $"{_reference.GetDisplayText() }" + string.Join(" ",_words.Select(word => word.GetDisplayText()));
+        string scripture = $"{_reference.GetDisplayText()} " + string.Join(" ",_words.Select(word => word.GetDisplayText()));
         return scripture;
     }
 
