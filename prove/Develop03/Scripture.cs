@@ -8,22 +8,64 @@ public class Scripture
     public Scripture(Reference Reference, string text)
     {
         _reference = Reference;
-        _words =  text.Split(" ").Select(word => new Word(word)).ToList();
+        _words = new List<Word>();
+
+        string[] wordArray = text.Split(' ');
+
+        foreach (string wordText in wordArray)
+        {
+            Word word = new Word(wordText);
+            _words.Add(word);
+        }
     }
 
     public void HiddenRandomWords(int numberToHide)
     {
-        var randomWord = new Random();
-        for(int i = 0; i < numberToHide; i++)
+        Random random = new Random();
+        List<Word> visibleWords = new List<Word>();
+
+        foreach (Word word in _words)
         {
-            int index = randomWord.Next(_words.Count);
-            _words[index].Hide();
+            if (!word.GetDisplayText().Contains("_____"))
+            {
+                visibleWords.Add(word);
+            }
+        }
+
+        if (visibleWords.Count <= numberToHide)
+        {
+            foreach (Word word in visibleWords)
+            {
+                word.Hide();
+            }
+        }
+        else
+        {
+            List<Word> wordsToHide = new List<Word>();
+
+            while (wordsToHide.Count < numberToHide)
+            {
+                int index = random.Next(0, visibleWords.Count);
+                Word word = visibleWords[index];
+
+                if (!wordsToHide.Contains(word))
+                {
+                    wordsToHide.Add(word);
+                    word.Hide();
+                }
+            }
         }
     }
 
     public string GetDisplayText()
     {
-        string scripture = $"{_reference.GetDisplayText()} " + string.Join(" ",_words.Select(word => word.GetDisplayText()));
+        string scripture = _reference.GetDisplayText() + " ";
+
+        foreach (Word word in _words)
+        {
+            scripture += word.GetDisplayText() + " ";
+        }
+
         return scripture;
     }
 

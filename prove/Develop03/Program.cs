@@ -5,15 +5,15 @@ class Program
 {
     static void Main(string[] args)
     {
-        Reference r2 = new Reference("Proverbs",3, 5,6);
-        string text = "Trust in the Lord with all your heart and lean not on. your own understanding; in all your ways submit to. Him, and He will make your paths straight.";
-        Scripture s1 = new Scripture(r2,text);
+        Reference scriptureReference = new Reference("3 Nephi",5, 13);
+        
+        Scripture scriptureWords = new Scripture(scriptureReference, "Behold, I am a disciple of Jesus Christ, the Son of God. I have been acalled of him to declare his word among his people, that they might have everlasting life.");
         
         Console.Clear();
 
-        Console.WriteLine(s1.GetDisplayText());
+        Console.WriteLine(scriptureWords.GetDisplayText());
 
-        while(!s1.IsCompletelyHidden())
+        while(!scriptureWords.IsCompletelyHidden())
         {
             Console.WriteLine("Please enter to continue or type 'quit' to finish:");
             string input = Console.ReadLine().ToLower();
@@ -23,12 +23,14 @@ class Program
                 break;
             }
 
-            s1.HiddenRandomWords(3);
+            scriptureWords.HiddenRandomWords(2);
 
             Console.Clear();
 
-            Console.WriteLine(s1.GetDisplayText());
+            Console.WriteLine(scriptureWords.GetDisplayText());
     
         }
     }
+
+    
 }

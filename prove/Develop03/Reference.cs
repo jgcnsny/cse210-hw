@@ -23,7 +23,7 @@ public class Reference
     }
     public string GetDisplayText()
     {
-        if(_verse == _endVerse)
+        if(_endVerse == 0)
         {
             string scriptureVerse = $"{_book} {_chapter}:{_verse}";
             return scriptureVerse;
