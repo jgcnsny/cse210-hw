@@ -7,7 +7,7 @@ public class ListingActivity: Activity
     private int _count;
     private List<string> _prompts = new List<string>();
 
-    private List<string> responses = new List<string>();
+    private List<string> _responses = new List<string>();
     
     public ListingActivity()
     {
@@ -47,7 +47,7 @@ public class ListingActivity: Activity
         {
             Console.Write("What is the filename? ");
             string listFile = Console.ReadLine();
-             SaveToFile(listFile, prompt, responses);
+             SaveToFile(listFile, prompt, _responses);
             DisplayEndingMessage();
         }
         else
@@ -77,9 +77,9 @@ public class ListingActivity: Activity
         
         Console.Write($"> ");
         string userEntry = Console.ReadLine();
-        responses.Add(userEntry);
+        _responses.Add(userEntry);
 
-        return responses;
+        return _responses;
     }
 
     public void SaveToFile(string fileName, string prompt, List<string> responses)

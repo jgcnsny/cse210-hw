@@ -50,7 +50,7 @@ public class Activity
         foreach (string s in animationStrings)
         {
             Console.Write(s);
-            Thread.Sleep(1000);
+            Thread.Sleep(500);
             Console.Write("\b \b");
         }
     }
