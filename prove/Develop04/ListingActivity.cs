@@ -1,11 +1,14 @@
 using System;
 using System.Net.Http.Headers;
+using System.IO;
 
 public class ListingActivity: Activity
 {
     private int _count;
     private List<string> _prompts = new List<string>();
 
+    private List<string> responses = new List<string>();
+    
     public ListingActivity()
     {
          _name = "Listing Activity";
@@ -22,20 +25,38 @@ public class ListingActivity: Activity
         DateTime startTime = DateTime.Now;
         DateTime stopTime = startTime.AddSeconds(_duration);
 
+        string prompt = GetRandomPrompt();
         Console.WriteLine($"List as many responses you can to the following prompt:\n");
-        Console.WriteLine($"--- {GetRandomPrompt()}---\n");
+        Console.WriteLine($"--- {prompt}---\n");
         Console.Write($"You may begin in: ");
         ShowCountDown(5);
         Console.WriteLine();
 
+        
+
         do
         {
-            _count += GetListFromUser().Count;
+            _count = GetListFromUser().Count;
         }
         while(DateTime.Now < stopTime);
 
         Console.WriteLine($"You listed {_count} items!");
-        DisplayEndingMessage();
+
+        Console.Write("\nDo you want to save the list in a file?(yes/no) ");
+        string answer = Console.ReadLine().ToLower();
+
+        if(answer == "yes")
+        {
+            Console.Write("What is the filename? ");
+            string listFile = Console.ReadLine();
+             SaveToFile(listFile, prompt, responses);
+            DisplayEndingMessage();
+        }
+        else
+        {
+            DisplayEndingMessage();
+        }
+        
     }
 
     public string GetRandomPrompt()
@@ -55,14 +76,41 @@ public class ListingActivity: Activity
 
     public List<string> GetListFromUser()
     {
-        List<string> userEntries = new List<string>();
+        
         Console.Write($"> ");
         string userEntry = Console.ReadLine();
-        userEntries.Add(userEntry);
+        responses.Add(userEntry);
 
-        return userEntries;
+        return responses;
+    }
 
+    public void SaveToFile(string fileName, string prompt, List<string> responses)
+    {
+        using (StreamWriter listSave = new StreamWriter(fileName))
+        {
+            listSave.WriteLine($"{prompt}");
 
+            foreach (string response in responses)
+            {
+                listSave.WriteLine($"> {response}");
+            }
+        }
+        Console.WriteLine($"List saved to '{fileName}'.");
+        
+            
+    }
+
+    public void LoadFromFile(string fileName)
+    {
+
+            using (StreamReader listLoad = new StreamReader(fileName))
+            {
+                string entry;
+                while ((entry = listLoad.ReadLine()) != null)
+                {
+                    Console.WriteLine(entry);
+                }
+            }
     }
 }
 
