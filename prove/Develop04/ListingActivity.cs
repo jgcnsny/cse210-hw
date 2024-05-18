@@ -32,8 +32,6 @@ public class ListingActivity: Activity
         ShowCountDown(5);
         Console.WriteLine();
 
-        
-
         do
         {
             _count = GetListFromUser().Count;
