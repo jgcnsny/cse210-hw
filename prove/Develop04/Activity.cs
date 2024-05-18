@@ -24,6 +24,7 @@ public class Activity
         _duration = int.Parse(Console.ReadLine());
         Console.Clear();
         Console.WriteLine("Get Ready...");
+        ShowSpinner(3);
     }
 
     public void DisplayEndingMessage()

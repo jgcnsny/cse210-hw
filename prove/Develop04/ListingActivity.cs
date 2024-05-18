@@ -17,10 +17,8 @@ public class ListingActivity: Activity
 
     public void Run()
     {
-         DisplayStartingMessage();
-        Console.Clear();
-        Console.WriteLine("Get Ready...");
-        ShowSpinner(3);
+        DisplayStartingMessage();
+        
 
         DateTime startTime = DateTime.Now;
         DateTime stopTime = startTime.AddSeconds(_duration);
