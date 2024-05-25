@@ -1,6 +1,7 @@
 using System;
 using System.Linq.Expressions;
 using System.IO;
+using System.Net;
 
 public class GoalManager
 {
@@ -28,6 +29,7 @@ public class GoalManager
             Console.WriteLine(" 4. Load Goals");
             Console.WriteLine(" 5. Record Event");
             Console.WriteLine(" 6. Quit");
+            Console.WriteLine(" 7. Remove Goal");
             
             Console.Write("Select a choice from the menu: ");
             choice = Console.ReadLine();
@@ -54,6 +56,10 @@ public class GoalManager
             else if(choice == "6")
             {
                 Console.WriteLine("Goodbye!");
+            }
+            else if(choice == "7")
+            {
+                RemoveGoal();
             }
             else
             {
@@ -216,7 +222,7 @@ public class GoalManager
             {
                 var goalParts = line.Split("|");
 
-                if (firstLine) // Process initial score
+                if (firstLine) 
                 {
                     score = int.Parse(goalParts[0]);
                     firstLine = false;
@@ -269,6 +275,42 @@ public class GoalManager
         
                 }
             
+            }
+        }
+    }
+
+    public void RemoveGoal()
+    {
+        Console.WriteLine("The goals are:");
+        ListGoalNames();
+
+        Console.Write("Which goal do you want to remove? ");
+        int choice = int.Parse(Console.ReadLine()) - 1;
+
+         if (choice >= 0 && choice < _goals.Count)
+        {
+            Console.WriteLine("Every goal removed there will a 5 points deduction");
+            Console.Write("Do you really want to remove your goal?(yes/no) ");
+            string answer = Console.ReadLine().ToLower();
+
+            if (answer == "yes")
+            {
+                int deduction = 5;
+                _goals.RemoveAt(choice);
+                _score -= deduction;
+                Console.WriteLine("Your goal was removed!\n");
+                Console.WriteLine($"Sorry! You have deducted {deduction} points!");
+                Console.WriteLine($"You now have {_score} points");
+
+                
+            }
+            else if(answer=="no")
+            {
+                Console.WriteLine("Your goal still remain!");
+            }
+            else
+            {
+                Console.WriteLine("Invalid answer!");
             }
         }
     }
