@@ -160,21 +160,28 @@ public class GoalManager
         Console.WriteLine("The goals are:");
         ListGoalNames();
 
-        Console.WriteLine("Which goal did you accomplish? ");
+        Console.Write("Which goal did you accomplish? ");
         int choice = int.Parse(Console.ReadLine()) - 1;
 
         if (choice >= 0 && choice < _goals.Count)
         {
-            int pointsGained = _goals[choice].RecordEvent();
-            _score += pointsGained;
-            Console.WriteLine($"Congratulations! You have earned {pointsGained} points");
-            Console.WriteLine($"You now have {_score} points");
-        }
+            if (_goals[choice].isComplete())
+            {
+                Console.WriteLine("You already completed this goal!");   
+            }  
+            else
+            {
+                int pointsGained = _goals[choice].RecordEvent();
+                _score += pointsGained;
+                Console.WriteLine($"Congratulations! You have earned {pointsGained} points!");
+                Console.WriteLine($"You now have {_score} points");
+            }
+        }   
+        
         else
         {
             Console.WriteLine("Invalid choice.");
         }
-    
         
     }
 
@@ -216,7 +223,7 @@ public class GoalManager
                     continue;
                 }
                 _score = score;
-                
+
                 if(goalParts[0]=="SimpleGoal")
                 {
                     
@@ -249,8 +256,9 @@ public class GoalManager
                     string description = goalParts[2];
                     int points = int.Parse(goalParts[3]);
                     int target = int.Parse(goalParts[4]);
-                    int bonus = int.Parse(goalParts[5]);
-                    int amountCompleted = int.Parse(goalParts[6]);
+                    int amountCompleted = int.Parse(goalParts[5]);
+                    int bonus = int.Parse(goalParts[6]);
+                    
 
                     CheckListGoals checkListGoals = new CheckListGoals(name, description, points, target,bonus);
                     for(int i = 0; i < amountCompleted; i++)
