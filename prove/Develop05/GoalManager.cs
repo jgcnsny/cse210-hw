@@ -306,7 +306,7 @@ public class GoalManager
             }
             else if(answer=="no")
             {
-                Console.WriteLine("Your goal still remain!");
+                Console.WriteLine("Your goal still on the list!");
             }
             else
             {
