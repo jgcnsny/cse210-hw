@@ -50,6 +50,6 @@ public class Order
 
     public string ShippingLabel()
     {
-         return $"{_customer.GetName()}\n{_customer.GetAddress().GetAddress()}";
+         return $"{_customer.GetName()}\n{_customer.GetAddress()}";
     }
 }

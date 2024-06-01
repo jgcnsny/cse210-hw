@@ -20,9 +20,9 @@ public class Customer
         return _name;
     }
 
-    public Address GetAddress()
+    public string GetAddress()
     {
-        return _address;
+        return _address.GetAddress(); 
     }
 
 }
