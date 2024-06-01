@@ -4,11 +4,11 @@ using System.Transactions;
 
 public class Video 
 {
-    public string _title;
-    public string _author;
-    public int _length;
+    private string _title;
+    private string _author;
+    private int _length;
 
-    public List<Comment> _comments = new List<Comment>();
+    private List<Comment> _comments = new List<Comment>();
 
     public Video(string title, string author, int length)
     {
