@@ -21,6 +21,6 @@ public class Cycling : Activity
     }
     public override string GetSummary()
     {
-         return $"{_date} Cycling ({_minutes} min) - Distance: {GetDistance()} miles, Speed: {_speed} mph, Pace: {GetPace()} min per mile";
+         return $"{_date} Cycling ({_minutes} min) - Distance: {GetDistance()} miles, Speed: {_speed:F2} mph, Pace: {GetPace():F2} min per mile";
     }
 }

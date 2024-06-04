@@ -11,7 +11,9 @@ public class Swimming : Activity
 
     public override double GetDistance()
     {
-        return _laps * 50 / 1000 * 0.62;
+        return _laps * 50 * 0.62 / 1000;
+
+       // return _laps * 0.03106855;
     }
 
     public override double GetSpeed()
@@ -25,6 +27,6 @@ public class Swimming : Activity
     }
     public override string GetSummary()
     {
-        return $"{_date} Swimming ({_minutes} min) - Distance: {GetDistance():F2} miles, Speed: {GetSpeed():F2} mph, Pace: {GetPace():F2} min per miles";
+        return $"{_date} Swimming ({_minutes} min) - Distance: {GetDistance():F3} miles, Speed: {GetSpeed():F2} mph, Pace: {GetPace():F2} min per miles";
     }
 }
